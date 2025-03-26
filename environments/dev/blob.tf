@@ -1,17 +1,3 @@
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 4.24.0" # Adjust to a version compatible with your setup
-    }
-    random = {
-        source  = "hashicorp/random"
-        version = "~> 3.1.0"
-    }
-  }
-  required_version = ">=1.11.2"
-}
-
 resource "random_id" "storage_account" {
   byte_length = 8
 }
