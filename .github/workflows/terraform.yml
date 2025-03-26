@@ -20,15 +20,37 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.11.2 # Use a recent version
-          
+          terraform_version: 1.5.0 # Use a recent version
+
+      - name: Install terraform-docs
+        run: |
+          curl -Lo terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.16.0-$(uname -s)-amd64.tar.gz
+          tar -xzf terraform-docs.tar.gz
+          chmod +x terraform-docs
+          sudo mv terraform-docs /usr/local/bin/
+        env:
+          # Ensure compatibility with GitHub runner (ubuntu-latest)
+          GOOS: linux
+          GOARCH: amd64
+
+      - name: Install tflint
+        run: |
+          curl -Lo tflint.zip https://github.com/terraform-linters/tflint/releases/download/v0.47.0/tflint_linux_amd64.zip
+          unzip tflint.zip
+          chmod +x tflint
+          sudo mv tflint /usr/local/bin/
+          tflint --init # Initialize tflint to download rulesets
+        env:
+          # Ensure compatibility with GitHub runner (ubuntu-latest)
+          GOOS: linux
+          GOARCH: amd64
+
       - name: Install pre-commit
         run: pip install pre-commit
 
       - name: Run pre-commit
         run: pre-commit run --all-files --show-diff-on-failure
         env:
-          # Ensure Terraform can authenticate for validate hook
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
