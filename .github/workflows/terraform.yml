@@ -15,12 +15,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x' # Use a recent Python version for pre-commit
+          python-version: '3.x'
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.5.0 # Use a recent version
+          terraform_version: 1.5.0
 
       - name: Install terraform-docs
         run: |
@@ -28,10 +28,6 @@ jobs:
           tar -xzf terraform-docs.tar.gz
           chmod +x terraform-docs
           sudo mv terraform-docs /usr/local/bin/
-        env:
-          # Ensure compatibility with GitHub runner (ubuntu-latest)
-          GOOS: linux
-          GOARCH: amd64
 
       - name: Install tflint
         run: |
@@ -39,11 +35,7 @@ jobs:
           unzip tflint.zip
           chmod +x tflint
           sudo mv tflint /usr/local/bin/
-          tflint --init # Initialize tflint to download rulesets
-        env:
-          # Ensure compatibility with GitHub runner (ubuntu-latest)
-          GOOS: linux
-          GOARCH: amd64
+          tflint --init
 
       - name: Install pre-commit
         run: pip install pre-commit
@@ -73,7 +65,6 @@ jobs:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-
 #      - name: Terraform Apply
 #        run: terraform apply tfplan
 #        working-directory: ./environments/dev
