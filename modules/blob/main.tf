@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.23.0" # Adjust to a version compatible with your setup
+    }
+  }
+}
+
 resource "azurerm_storage_account" "example" {
   name                     = var.storage_account_name
   resource_group_name      = var.resource_group_name

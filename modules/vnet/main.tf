@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.23.0" # Adjust to a version compatible with your setup
+    }
+  }
+}
+
 resource "azurerm_virtual_network" "example" {
   name                = var.vnetwork_name
   location            = var.location

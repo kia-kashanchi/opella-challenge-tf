@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 1.11.2" # Matches the Terraform version used in the GitHub Actions CI/CD pipeline
+}
+
 provider "azurerm" {
   features {}
   # Credentials are sourced from GitHub Secrets as environment variables:

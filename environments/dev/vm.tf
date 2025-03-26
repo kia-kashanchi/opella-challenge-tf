@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 1.11.2" # Matches the Terraform version used in the GitHub Actions CI/CD pipeline
+}
+
 module "vm" {
   source = "../../modules/vm"
 

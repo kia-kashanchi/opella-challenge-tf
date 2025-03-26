@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.23.0" # Adjust to a version compatible with your setup
+    }
+  }
+}
+
 resource "azurerm_public_ip" "example" {
   name                = "${var.vm_name}-pip"
   location            = var.location

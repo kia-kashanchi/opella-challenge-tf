@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 1.11.2" # Matches the Terraform version used in the GitHub Actions CI/CD pipeline
+}
+
 resource "random_id" "storage_account" {
   byte_length = 8
 }
