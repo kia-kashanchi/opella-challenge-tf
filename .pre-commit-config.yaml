@@ -1,0 +1,29 @@
+repos:
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.92.0 # Use the latest stable version
+    hooks:
+      - id: terraform_fmt
+        description: "Formats Terraform files"
+        args: ["--args=-recursive"] # Applies to all .tf files recursively
+      - id: terraform_validate
+        description: "Validates Terraform configuration"
+        args: ["--hook-config=--retry-once-with-cleanup=true"] # Retries once with cleanup
+      - id: terraform_docs
+        description: "Generates Terraform module documentation"
+        args:
+          - "--args=--output-file=README.md"
+          - "--args=--recursive" # Updates README.md in all module directories
+      - id: terraform_tflint
+        description: "Lints Terraform code with tflint"
+        args:
+          - "--args=--recursive" # Lints all .tf files recursively
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0 # Use the latest stable version
+    hooks:
+      - id: check-yaml
+        description: "Checks YAML files for syntax errors"
+      - id: trailing-whitespace
+        description: "Removes trailing whitespace"
+      - id: end-of-file-fixer
+        description: "Ensures files end with a newline"
