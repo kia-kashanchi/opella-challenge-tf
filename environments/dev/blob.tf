@@ -5,10 +5,10 @@ resource "random_id" "storage_account" {
 module "blob" {
   source = "../../modules/blob"
 
-  resource_group_name    = var.resource_group_name
-  location               = var.location
-  storage_account_name   = "${var.environment}storage${random_id.storage_account.hex}"
-  container_name         = "data"
+  resource_group_name  = var.resource_group_name
+  location             = var.location
+  storage_account_name = "${var.environment}storage${random_id.storage_account.hex}"
+  container_name       = "data"
   tags = {
     environment = var.environment
     region      = var.region

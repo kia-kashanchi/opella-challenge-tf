@@ -7,7 +7,7 @@ resource "azurerm_virtual_network" "example" {
   dynamic "subnet" {
     for_each = var.subnets
     content {
-      name           = subnet.key
+      name             = subnet.key
       address_prefixes = [subnet.value.address_prefix]
     }
   }
