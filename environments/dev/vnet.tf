@@ -1,5 +1,11 @@
 terraform {
-  required_version = ">= 1.11.2" # Matches the Terraform version used in the GitHub Actions CI/CD pipeline
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.24.0" # Adjust to a version compatible with your setup
+    }
+  }
+  required_version = ">=1.11.2"
 }
 
 provider "azurerm" {
