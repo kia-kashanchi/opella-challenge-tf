@@ -8,7 +8,7 @@ resource "azurerm_virtual_network" "example" {
     for_each = var.subnets
     content {
       name           = subnet.key
-      address_prefix = subnet.value.address_prefix
+      address_prefixes = [subnet.value.address_prefix]
     }
   }
 
